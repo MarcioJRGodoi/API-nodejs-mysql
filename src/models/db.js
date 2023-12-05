@@ -2,6 +2,7 @@
 const { Sequelize } = require('sequelize');
 const mysql = require('mysql2/promise');
 const UserModel = require('./UserModel');
+const TaskModel = require('./TaskModel');
 require("dotenv").config();
 
 async function initialize() {
@@ -24,12 +25,13 @@ async function initialize() {
 
     // Inicializa os modelos
     const User = UserModel(sequelize);
+    const Task = TaskModel(sequelize);
 
     // Sincroniza todos os modelos com o banco de dados
     await sequelize.sync();
 
     // Exporta os modelos
-    return { User };
+    return { User, Task };
 }
 
 module.exports = initialize();
