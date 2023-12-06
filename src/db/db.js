@@ -1,8 +1,8 @@
 // conexao.js
 const { Sequelize } = require('sequelize');
 const mysql = require('mysql2/promise');
-const UserModel = require('./UserModel');
-const TaskModel = require('./TaskModel');
+const UserModel = require('../models/UserModel');
+const TaskModel = require('../models/TaskModel');
 require("dotenv").config();
 
 async function initialize() {

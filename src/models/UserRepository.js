@@ -1,28 +1,34 @@
-const _context = require("./db");
+// UserRepository.js
+const _context = require("../db/db");
 
 const getAll = async () => {
-        const users = (await _context).User.findAll();
-        return users;
+    return await (await _context).User.findAll();
 }
 
 const getOneById = async (id) => {
-    const user = (await _context).User.findByPk(id);
-    return user;
+    return await (await _context).User.findByPk(id);
 }
 
 const create = async (userData) => {
-    const user = await (await _context).User.create(userData)
-    return user;
+    return await (await _context).User.create(userData);
 }
 
 const update = async (userData) => {
-    console.log(userData)
-    const user = (await _context).User.findByPk(userData.id).then((user) => {
+    return (await _context).User.findByPk(userData.id).then((user) => {
         if(user){
             user.update(userData);
             return user;
         }
-    })
+    });
+}
+
+const deleteById = async (id) => {
+    return (await _context).User.findByPk(id).then((user) => {
+        if(user){
+            user.destroy();
+            return user;
+        }
+    });
 }
 
 module.exports = {
@@ -30,4 +36,5 @@ module.exports = {
     getOneById,
     create,
     update,
+    deleteById
 }
